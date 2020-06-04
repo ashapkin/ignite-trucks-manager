@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IgniteTrucksManager.Core.Models;
 
 namespace IgniteTrucksManager.Core.Repo
@@ -12,7 +13,7 @@ namespace IgniteTrucksManager.Core.Repo
         /// Adds a truck to a storage.
         /// </summary>
         /// <param name="truck">Truck model.</param>
-        void Add(Truck truck);
+        void Save(Truck truck);
 
         /// <summary>
         /// Gets a truck from a storage.
@@ -20,5 +21,11 @@ namespace IgniteTrucksManager.Core.Repo
         /// <param name="id">Truck identifier.</param>
         /// <returns>Truck model</returns>
         Truck Get(Guid id);
+
+        /// <summary>
+        /// Gets all trucks.
+        /// </summary>
+        /// <returns>Truck model</returns>
+        IEnumerable<Truck> GetAll();
     }
 }

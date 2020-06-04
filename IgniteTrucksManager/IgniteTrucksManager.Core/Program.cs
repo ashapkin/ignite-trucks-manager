@@ -17,18 +17,16 @@ namespace IgniteTrucksManager.Core
         /// </summary>
         static void Main(string[] args)
         {
-            using (var ignite = Ignition.Start())
-            {
-                ITrucksRepository repository = new TrucksRepository(ignite);
+            using var ignite = Ignition.Start();
+            ITrucksRepository repository = new TrucksRepository(ignite);
 
-                Truck truck = GenerateTruck();
-                repository.Add(truck);
+            Truck truck = GenerateTruck();
+            repository.Save(truck);
                 
-                Truck persistedTruck = repository.Get(truck.Id);
+            Truck persistedTruck = repository.Get(truck.Id);
                 
-                Console.WriteLine(persistedTruck);
-                Debug.Assert(persistedTruck != null);
-            }
+            Console.WriteLine(persistedTruck);
+            Debug.Assert(persistedTruck != null);
         }
 
         /// <summary>

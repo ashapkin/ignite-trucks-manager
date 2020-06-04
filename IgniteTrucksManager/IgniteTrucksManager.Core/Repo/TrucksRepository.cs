@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Apache.Ignite.Core;
 using IgniteTrucksManager.Core.Models;
 
@@ -27,7 +28,7 @@ namespace IgniteTrucksManager.Core.Repo
         /// <summary>
         /// <inheritdoc cref="TrucksRepository"/>
         /// </summary>
-        public void Add(Truck truck)
+        public void Save(Truck truck)
         {
             var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
             cache[truck.Id] = truck;
@@ -47,6 +48,15 @@ namespace IgniteTrucksManager.Core.Repo
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="TrucksRepository"/>
+        /// </summary>
+        public IEnumerable<Truck> GetAll()
+        {
+            var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
+            return cache.Select(x => x.Value).ToList();
         }
     }
 }

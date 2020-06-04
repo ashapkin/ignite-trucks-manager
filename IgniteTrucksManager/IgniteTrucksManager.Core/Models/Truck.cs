@@ -37,7 +37,7 @@ namespace IgniteTrucksManager.Core.Models
         }
 
         /// <summary>
-        /// Add new sensor items.
+        /// Save new sensor items.
         /// </summary>
         /// <param name="data">Sensor data.</param>
         public Truck AddSensorData(IEnumerable<SensorData> data)
