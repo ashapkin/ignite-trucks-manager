@@ -35,7 +35,7 @@ namespace IgniteTrucksManager.Core
         /// <returns></returns>
         private static Truck GenerateTruck()
         {
-            var truck = new Truck("001")
+            var truck = new Truck(1)
                 .AddSensorData(new List<SensorData>()
                 {
                     new SensorData

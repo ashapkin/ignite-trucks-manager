@@ -30,16 +30,16 @@ namespace IgniteTrucksManager.Core.Repo
         /// </summary>
         public void Save(Truck truck)
         {
-            var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
+            var cache = _ignite.GetOrCreateCache<int, Truck>(CacheName);
             cache[truck.Id] = truck;
         }
 
         /// <summary>
         /// <inheritdoc cref="TrucksRepository"/>
         /// </summary>
-        public Truck Get(Guid id)
+        public Truck Get(int id)
         {
-            var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
+            var cache = _ignite.GetOrCreateCache<int, Truck>(CacheName);
             try
             {
                 return cache[id];
@@ -55,8 +55,9 @@ namespace IgniteTrucksManager.Core.Repo
         /// </summary>
         public IEnumerable<Truck> GetAll()
         {
-            var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
-            return cache.Select(x => x.Value).ToList();
+            var cache = _ignite.GetOrCreateCache<int, Truck>(CacheName);
+            var res = cache.Select(x => x.Value).ToList();
+            return res;
         }
     }
 }

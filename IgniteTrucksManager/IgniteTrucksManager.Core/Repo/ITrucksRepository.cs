@@ -20,7 +20,7 @@ namespace IgniteTrucksManager.Core.Repo
         /// </summary>
         /// <param name="id">Truck identifier.</param>
         /// <returns>Truck model</returns>
-        Truck Get(Guid id);
+        Truck Get(int id);
 
         /// <summary>
         /// Gets all trucks.

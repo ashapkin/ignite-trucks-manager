@@ -1,11 +1,13 @@
 using Apache.Ignite.Core;
 using IgniteTrucksManager.Core.ExternalProvider;
+using IgniteTrucksManager.Core.Ignite;
 using IgniteTrucksManager.Core.Repo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace IgniteTrucksManager.Api
 {
@@ -22,14 +24,14 @@ namespace IgniteTrucksManager.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IIgnite, IIgnite>(serviceProvider => Ignition.Start());
+            services.AddSingleton<IIgnite, IIgnite>(serviceProvider => IgniteFactory.Start());
             services.AddSingleton<ITrucksRepository, TrucksRepository>();
             services.AddSingleton<ExternalDataProvider, ExternalDataProvider>();
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -42,10 +44,9 @@ namespace IgniteTrucksManager.Api
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            loggerFactory.AddLog4Net("config/log4net.xml");
+
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

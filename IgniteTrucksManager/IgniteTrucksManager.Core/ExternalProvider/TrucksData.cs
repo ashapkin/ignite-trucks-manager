@@ -20,7 +20,7 @@ namespace IgniteTrucksManager.Core.ExternalProvider
             var data = new Dictionary<Truck, SensorData[]>
             {
                 {
-                    new Truck("1"), new[]
+                    new Truck(1), new[]
                     {
                         new SensorData {DateTimeUtc = DateTime.Parse("2020-01-01 12:00:00"), FuelLevel = 100, Speed = 80},
                         new SensorData {DateTimeUtc = DateTime.Parse("2020-01-01 12:01:00"), FuelLevel = 100, Speed = 80},

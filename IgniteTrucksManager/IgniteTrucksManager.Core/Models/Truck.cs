@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IgniteTrucksManager.Core.Models
 {
@@ -9,31 +10,22 @@ namespace IgniteTrucksManager.Core.Models
     public class Truck
     {
         /// <summary>
-        /// Identity.
+        /// Registration id.
         /// </summary>
-        public Guid Id { get; }
-
-        /// <summary>
-        /// Registration number.
-        /// </summary>
-        public string Number { get; }
-
-        /** Internal sensor data collection. */
-        private readonly List<SensorData> _data = new List<SensorData>();
+        public int Id { get; }
 
         /// <summary>
         /// Related sensor data
         /// </summary>
-        public IEnumerable<SensorData> Data => _data;
-    
+        public List<SensorData> Data { get; } = new List<SensorData>();
+
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Truck(string number)
+        public Truck(int id)
         {
-            Id = Guid.NewGuid();
-            Number = number;
+            Id = id;
         }
 
         /// <summary>
@@ -42,14 +34,24 @@ namespace IgniteTrucksManager.Core.Models
         /// <param name="data">Sensor data.</param>
         public Truck AddSensorData(IEnumerable<SensorData> data)
         {
-            _data.AddRange(data);
+            DateTime? startDate = Data.LastOrDefault()?.DateTimeUtc;
+
+            var ordered = data.OrderBy(x => x.DateTimeUtc).ToList();
+
+            if (startDate == null || ordered.FirstOrDefault()?.DateTimeUtc > startDate)
+            {
+                Data.AddRange(ordered);
+            }
 
             return this;
         }
 
+        /// <summary>
+        /// <inheritdoc cref="object"/>
+        /// </summary>
         public override string ToString()
         {
-            return $"Truck [Id={Id}, Number={Number}, Sensor events count={_data.Count}]";
+            return $"Truck [Id={Id},  Sensor events count={Data.Count}]";
         }
     }
 }
