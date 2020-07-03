@@ -1,4 +1,5 @@
 using Apache.Ignite.Core;
+using IgniteTrucksManager.Core.ComputeTasks;
 using IgniteTrucksManager.Core.ExternalProvider;
 using IgniteTrucksManager.Core.Ignite;
 using IgniteTrucksManager.Core.Repo;
@@ -27,6 +28,7 @@ namespace IgniteTrucksManager.Api
             services.AddSingleton<IIgnite, IIgnite>(serviceProvider => IgniteFactory.Start());
             services.AddSingleton<ITrucksRepository, TrucksRepository>();
             services.AddSingleton<ExternalDataProvider, ExternalDataProvider>();
+            services.AddSingleton<IIgniteCompute, IgniteCompute>();
             services.AddControllers();
         }
 

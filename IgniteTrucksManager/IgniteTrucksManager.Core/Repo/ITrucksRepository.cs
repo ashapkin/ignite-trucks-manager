@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IgniteTrucksManager.Core.Models;
 
 namespace IgniteTrucksManager.Core.Repo
