@@ -13,6 +13,15 @@ git checkout chapter-4
 
 There should be a Chapter4.md readme file with a short description of a chapter and code changes.
 
+### Content
+[Chapter 1 - Apache Ignite .NET installation](Chapter1.md)
+
+[Chapter 2 - Setting up ASP.NET Core](Chapter2.md)
+
+[Chapter 3 - Configuring Ignite logging](Chapter3.md)
+
+[Chapter 4 - ComputGrid API](Chapter4.md)
+
 License
 ----
 
