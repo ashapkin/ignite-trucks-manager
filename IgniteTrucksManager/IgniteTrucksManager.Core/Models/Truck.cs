@@ -7,13 +7,8 @@ namespace IgniteTrucksManager.Core.Models
     /// <summary>
     /// Truck object.
     /// </summary>
-    public class Truck
+    public class Truck : ModelBase<int>
     {
-        /// <summary>
-        /// Registration id.
-        /// </summary>
-        public int Id { get; }
-
         /// <summary>
         /// Related sensor data
         /// </summary>

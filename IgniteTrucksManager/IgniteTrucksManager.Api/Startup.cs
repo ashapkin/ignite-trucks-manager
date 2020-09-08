@@ -1,7 +1,8 @@
+using System;
 using Apache.Ignite.Core;
 using IgniteTrucksManager.Core.ComputeTasks;
 using IgniteTrucksManager.Core.ExternalProvider;
-using IgniteTrucksManager.Core.Ignite;
+using IgniteTrucksManager.Core.Models;
 using IgniteTrucksManager.Core.Repo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,8 +26,11 @@ namespace IgniteTrucksManager.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IIgnite, IIgnite>(serviceProvider => IgniteFactory.Start());
-            services.AddSingleton<ITrucksRepository, TrucksRepository>();
+            services.AddSingleton<IIgnite, IIgnite>(serviceProvider => Ignition.Start());
+            services.AddSingleton<IRepository<int, Truck>, TrucksRepository>();
+            services.AddSingleton<IRepository<Guid, Driver>, DriversRepository>();
+            services.AddSingleton<IRepository<Guid, Customer>, CustomersRepository>();
+            services.AddSingleton<IRepository<Guid, Trip>, TripsRepository>();
             services.AddSingleton<ExternalDataProvider, ExternalDataProvider>();
             services.AddSingleton<IIgniteCompute, IgniteCompute>();
             services.AddControllers();

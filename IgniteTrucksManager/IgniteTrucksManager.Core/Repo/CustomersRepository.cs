@@ -1,18 +1,19 @@
-﻿using Apache.Ignite.Core;
+﻿using System;
+using Apache.Ignite.Core;
 using IgniteTrucksManager.Core.Models;
 
 namespace IgniteTrucksManager.Core.Repo
 {
     /// <summary>
-    /// Trucks repository.
+    /// Drivers repository.
     /// </summary>
-    public class TrucksRepository : IgniteRepositoryBase<int, Truck>
+    public class CustomersRepository : IgniteRepositoryBase<Guid, Customer>
     {
         /// <summary>
         /// Ctor.
         /// </summary>
         /// <param name="ignite">Ignite instance.</param>
-        public TrucksRepository(IIgnite ignite) : base(ignite, "Trucks")
+        public CustomersRepository(IIgnite ignite) : base(ignite, "Customers")
         { }
     }
 }

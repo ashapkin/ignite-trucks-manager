@@ -16,7 +16,7 @@ namespace IgniteTrucksManager.Api.Controllers
     public class TrucksController : ControllerBase
     {
         /** */
-        private readonly ITrucksRepository _repository;
+        private readonly IRepository<int, Truck> _repository;
 
         /** */
         private readonly IIgniteCompute _igniteCompute;
@@ -30,7 +30,7 @@ namespace IgniteTrucksManager.Api.Controllers
         /// <param name="repository">Repository.</param>
         /// <param name="igniteCompute">Ignite compute.</param>
         /// <param name="logger">Logger.</param>
-        public TrucksController(ITrucksRepository repository, IIgniteCompute igniteCompute, ILogger<TrucksController> logger)
+        public TrucksController(IRepository<int, Truck> repository, IIgniteCompute igniteCompute, ILogger<TrucksController> logger)
         {
             _repository = repository;
             _igniteCompute = igniteCompute;

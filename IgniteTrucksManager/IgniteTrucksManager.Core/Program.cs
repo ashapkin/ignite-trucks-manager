@@ -18,7 +18,7 @@ namespace IgniteTrucksManager.Core
         static void Main(string[] args)
         {
             using var ignite = Ignition.Start();
-            ITrucksRepository repository = new TrucksRepository(ignite);
+            IRepository<int, Truck> repository = new TrucksRepository(ignite);
 
             Truck truck = GenerateTruck();
             repository.Save(truck);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IgniteTrucksManager.Core.Models;
 using IgniteTrucksManager.Core.Repo;
 
@@ -10,12 +11,34 @@ namespace IgniteTrucksManager.Core.ExternalProvider
     /// </summary>
     public class ExternalDataProvider
     {
-        /** */
-        private readonly ITrucksRepository _repository;
+        /** Trucks repository. */
+        private readonly IRepository<int, Truck> _trucksRepository;
 
-        public ExternalDataProvider(ITrucksRepository repository)
+        /** Drivers repository. */
+        private readonly IRepository<Guid, Driver> _driversRepository;
+
+        /** Customers repository. */
+        private readonly IRepository<Guid, Customer> _customersRepository;
+
+        /** Trips repository. */
+        private readonly IRepository<Guid, Trip> _tripsRepository;
+
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        /// <param name="trucksRepository">Trucks repository.</param>
+        /// <param name="driversRepository">Drivers repository.</param>
+        /// <param name="customersRepository">Customers repository.</param>
+        /// <param name="tripsRepository">Trips repository.</param>
+        public ExternalDataProvider(IRepository<int, Truck> trucksRepository,
+            IRepository<Guid, Driver> driversRepository,
+            IRepository<Guid, Customer> customersRepository,
+            IRepository<Guid, Trip> tripsRepository)
         {
-            _repository = repository;
+            _trucksRepository = trucksRepository;
+            _driversRepository = driversRepository;
+            _customersRepository = customersRepository;
+            _tripsRepository = tripsRepository;
         }
 
         /// <summary>
@@ -27,10 +50,25 @@ namespace IgniteTrucksManager.Core.ExternalProvider
 
             foreach (KeyValuePair<Truck, SensorData[]> item in newData)
             {
-                Truck truck = _repository.Get(item.Key.Id) ?? item.Key;
+                Truck truck = _trucksRepository.Get(item.Key.Id) ?? item.Key;
                 truck.AddSensorData(item.Value);
 
-                _repository.Save(truck);
+                _trucksRepository.Save(truck);
+            }
+
+            foreach (Driver driver in DriversData.GetDrivers())
+            {
+                _driversRepository.Save(driver);
+            }
+
+            foreach (Customer customer in CustomersData.GetCustomers())
+            {
+                _customersRepository.Save(customer);
+            }
+
+            foreach (Trip trip in TripsData.GetTrips())
+            {
+                _tripsRepository.Save(trip);
             }
         }
     }
