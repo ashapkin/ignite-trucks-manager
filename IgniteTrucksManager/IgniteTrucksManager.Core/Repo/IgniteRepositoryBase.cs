@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Apache.Ignite.Core;
 using Apache.Ignite.Core.Cache;
+using Apache.Ignite.Core.Cache.Configuration;
+using Apache.Ignite.Core.Cache.Query;
 using IgniteTrucksManager.Core.Models;
 
 namespace IgniteTrucksManager.Core.Repo
@@ -36,7 +38,11 @@ namespace IgniteTrucksManager.Core.Repo
                 throw new ArgumentNullException(nameof(ignite));
             }
 
-            Cache = new Lazy<ICache<TKey, TValue>>(() => ignite.GetOrCreateCache<TKey, TValue>(cacheName));
+            Cache = new Lazy<ICache<TKey, TValue>>(() =>
+            {
+                var cacheCfg = new CacheConfiguration(cacheName, new QueryEntity(typeof(TKey), typeof(TValue)));
+                return ignite.GetOrCreateCache<TKey, TValue>(cacheCfg);
+            });
         }
 
         /// <summary>
@@ -73,6 +79,14 @@ namespace IgniteTrucksManager.Core.Repo
         public virtual IEnumerable<TValue> GetAll()
         {
             return Cache.Value.Select(x => x.Value).ToList();
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="IRepository{TKey,TValue}.Query"/>
+        /// </summary>
+        public object Query(string sql)
+        {
+            return Cache.Value.Query(new SqlFieldsQuery(sql));
         }
     }
 }

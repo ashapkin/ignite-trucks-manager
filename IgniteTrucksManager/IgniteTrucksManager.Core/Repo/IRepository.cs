@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using IgniteTrucksManager.Core.Models;
 
@@ -30,5 +31,11 @@ namespace IgniteTrucksManager.Core.Repo
         /// </summary>
         /// <returns>The stored values set.</returns>
         IEnumerable<TValue> GetAll();
+
+        /// <summary>
+        /// Runs SQL query.
+        /// </summary>
+        /// <returns>Query result.</returns>
+        object Query(string sql);
     }
 }

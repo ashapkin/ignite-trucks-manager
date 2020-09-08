@@ -42,5 +42,20 @@ namespace IgniteTrucksManager.Api.Controllers
 
             return _repository.GetAll();
         }
+
+       
+        /// <summary>
+        /// Queries drivers.
+        /// </summary>
+        /// <param name="sql">SQL statement.</param>
+        /// <returns>Query result</returns>
+        [HttpGet]
+        [Route("query")]
+        public object Query(string sql)
+        {
+            _logger.LogDebug("Querying drivers");
+
+            return _repository.Query(sql);
+        }
     }
 }

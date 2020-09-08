@@ -1,4 +1,5 @@
 ﻿using System;
+using Apache.Ignite.Core.Cache.Configuration;
 
 namespace IgniteTrucksManager.Core.Models
 {
@@ -10,14 +11,17 @@ namespace IgniteTrucksManager.Core.Models
         /// <summary>
         /// Driver's name.
         /// </summary>
+        [QuerySqlField]
         public string Name { get; set; }
         /// <summary>
         /// Current rating.
         /// </summary>
+        [QuerySqlField]
         public double Rating { get; set; }
         /// <summary>
         /// Driver's account balance.
         /// </summary>
+        [QuerySqlField]
         public decimal Balance { get; set; }
     }
 }
