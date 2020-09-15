@@ -82,11 +82,19 @@ namespace IgniteTrucksManager.Core.Repo
         }
 
         /// <summary>
-        /// <inheritdoc cref="IRepository{TKey,TValue}.Query"/>
+        /// <inheritdoc cref="IRepository{TKey,TValue}.Query(string)"/>
         /// </summary>
-        public object Query(string sql)
+        public IList<object> Query(string sql)
         {
-            return Cache.Value.Query(new SqlFieldsQuery(sql));
+            return Cache.Value.Query(new SqlFieldsQuery(sql)).GetAll().FirstOrDefault();
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="IRepository{TKey,TValue}.Query(string, object[])"/>
+        /// </summary>
+        public IList<object> Query(string sql, params object[] args)
+        {
+            return Cache.Value.Query(new SqlFieldsQuery(sql, args)).GetAll().FirstOrDefault();
         }
     }
 }

@@ -36,6 +36,8 @@ namespace IgniteTrucksManager.Api.Controllers
         [HttpGet]
         public string Get()
         {
+            _logger.LogDebug("Loading initial data");
+
             _dataProvider.PullNewData();
             return "Completed!";
         }

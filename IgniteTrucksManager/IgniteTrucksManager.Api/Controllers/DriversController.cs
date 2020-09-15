@@ -57,5 +57,16 @@ namespace IgniteTrucksManager.Api.Controllers
 
             return _repository.Query(sql);
         }
+
+        [HttpGet]
+        [Route("topdrivers")]
+        public object TopDriversSql()
+        {
+            _logger.LogDebug("Getting top drivers");
+
+            var sql = "select Name, Rating from Driver order by Rating desc";
+
+            return _repository.Query(sql);
+        }
     }
 }

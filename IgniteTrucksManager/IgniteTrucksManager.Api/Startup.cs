@@ -1,6 +1,7 @@
 using System;
 using Apache.Ignite.Core;
 using IgniteTrucksManager.Core.ComputeTasks;
+using IgniteTrucksManager.Core.Domain;
 using IgniteTrucksManager.Core.ExternalProvider;
 using IgniteTrucksManager.Core.Models;
 using IgniteTrucksManager.Core.Repo;
@@ -33,6 +34,7 @@ namespace IgniteTrucksManager.Api
             services.AddSingleton<IRepository<Guid, Trip>, TripsRepository>();
             services.AddSingleton<ExternalDataProvider, ExternalDataProvider>();
             services.AddSingleton<IIgniteCompute, IgniteCompute>();
+            services.AddSingleton<TripsManager, TripsManager>();
             services.AddControllers();
         }
 

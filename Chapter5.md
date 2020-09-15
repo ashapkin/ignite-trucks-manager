@@ -34,5 +34,26 @@ Add an ugly method to our Driver's controller and try running the query:
 
 drivers/query?sql=select * from driver
 
+The question: 
+WHY CANT WE JUST USE SOME KIND OF ATTRIBUTES FOR QUERY ENTITY SPECIFICATION?
+
+Ok, let's try to specify our quiery right in-place:
+```
+        [HttpGet]
+        [Route("topdrivers")]
+        public object TopDriversSql()
+        {
+            _logger.LogDebug("Getting top drivers");
+
+            var sql = "select Name, Rating from Driver order by Rating desc";
+
+            return _repository.Query(sql);
+        }
+```
+
+The .NET framework support a well-known LINQ feature, the Apache Ignite have a LINQ extention as well,
+thus let's add it to our project
+
+
 
 

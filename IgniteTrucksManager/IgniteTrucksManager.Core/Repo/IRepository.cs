@@ -35,7 +35,16 @@ namespace IgniteTrucksManager.Core.Repo
         /// <summary>
         /// Runs SQL query.
         /// </summary>
+        /// <param name="sql">Sql.</param>
         /// <returns>Query result.</returns>
-        object Query(string sql);
+        IList<object> Query(string sql);
+
+        /// <summary>
+        /// Runs SQL query.
+        /// </summary>
+        /// <param name="sql">Sql.</param>
+        /// <param name="args">Args.</param>
+        /// <returns>Query result.</returns>
+        IList<object> Query(string sql, params object[] args);
     }
 }
