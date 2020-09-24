@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using IgniteTrucksManager.Core.Models;
 using IgniteTrucksManager.Core.Repo;
 
@@ -11,9 +10,6 @@ namespace IgniteTrucksManager.Core.ExternalProvider
     /// </summary>
     public class ExternalDataProvider
     {
-        /** Trucks repository. */
-        private readonly IRepository<int, Truck> _trucksRepository;
-
         /** Drivers repository. */
         private readonly IRepository<Guid, Driver> _driversRepository;
 
@@ -26,16 +22,14 @@ namespace IgniteTrucksManager.Core.ExternalProvider
         /// <summary>
         /// Ctor.
         /// </summary>
-        /// <param name="trucksRepository">Trucks repository.</param>
         /// <param name="driversRepository">Drivers repository.</param>
         /// <param name="customersRepository">Customers repository.</param>
         /// <param name="tripsRepository">Trips repository.</param>
-        public ExternalDataProvider(IRepository<int, Truck> trucksRepository,
+        public ExternalDataProvider(
             IRepository<Guid, Driver> driversRepository,
             IRepository<Guid, Customer> customersRepository,
             IRepository<Guid, Trip> tripsRepository)
         {
-            _trucksRepository = trucksRepository;
             _driversRepository = driversRepository;
             _customersRepository = customersRepository;
             _tripsRepository = tripsRepository;
@@ -46,16 +40,6 @@ namespace IgniteTrucksManager.Core.ExternalProvider
         /// </summary>
         public void PullNewData()
         {
-            IDictionary<Truck, SensorData[]> newData = TrucksData.GetData();
-
-            foreach (KeyValuePair<Truck, SensorData[]> item in newData)
-            {
-                Truck truck = _trucksRepository.Get(item.Key.Id) ?? item.Key;
-                truck.AddSensorData(item.Value);
-
-                _trucksRepository.Save(truck);
-            }
-
             foreach (Driver driver in DriversData.GetDrivers())
             {
                 _driversRepository.Save(driver);

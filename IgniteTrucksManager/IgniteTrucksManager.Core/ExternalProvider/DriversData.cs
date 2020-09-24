@@ -9,6 +9,10 @@ namespace IgniteTrucksManager.Core.ExternalProvider
     /// </summary>
     internal static class DriversData
     {
+        /// <summary>
+        /// Generates drivers.
+        /// </summary>
+        /// <returns>Drivers.</returns>
         public static IList<Driver> GetDrivers()
         {
             return new List<Driver>

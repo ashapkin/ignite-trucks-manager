@@ -22,6 +22,16 @@ There should be a Chapter4.md readme file with a short description of a chapter 
 
 [Chapter 4 - ComputGrid API](Chapter4.md)
 
+[Chapter 5 - SQL](Chapter5.md)
+
+[Chapter 6 - LINQ](ChapterNA.md)
+
+[Chapter 7 - Transactions](ChapterNA.md)
+
+[Chapter 8 - Populating data with DataStreamer](ChapterNA.md)
+
+[Chapter 9 - Ignite events](ChapterNA.md)
+
 License
 ----
 

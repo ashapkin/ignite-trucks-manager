@@ -9,6 +9,10 @@ namespace IgniteTrucksManager.Core.ExternalProvider
     /// </summary>
     internal static class CustomersData
     {
+        /// <summary>
+        /// Generates customers.
+        /// </summary>
+        /// <returns>Customers.</returns>
         public static IList<Customer> GetCustomers()
         {
             return new List<Customer>

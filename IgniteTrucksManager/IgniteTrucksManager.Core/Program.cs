@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using Apache.Ignite.Core;
 using IgniteTrucksManager.Core.Models;
@@ -18,41 +17,30 @@ namespace IgniteTrucksManager.Core
         static void Main(string[] args)
         {
             using var ignite = Ignition.Start();
-            IRepository<int, Truck> repository = new TrucksRepository(ignite);
+            IRepository<Guid, Driver> repository = new DriversRepository(ignite);
 
-            Truck truck = GenerateTruck();
-            repository.Save(truck);
-                
-            Truck persistedTruck = repository.Get(truck.Id);
-                
+            Driver driver = GenerateDriver();
+            repository.Save(driver);
+
+            Driver persistedTruck = repository.Get(driver.Id);
+
             Console.WriteLine(persistedTruck);
             Debug.Assert(persistedTruck != null);
         }
 
         /// <summary>
-        /// Generates new truck instance.
+        /// Generates new driver instance.
         /// </summary>
         /// <returns></returns>
-        private static Truck GenerateTruck()
+        private static Driver GenerateDriver()
         {
-            var truck = new Truck(1)
-                .AddSensorData(new List<SensorData>()
-                {
-                    new SensorData
-                    {
-                        DateTimeUtc = DateTime.UtcNow.AddMinutes(-1),
-                        FuelLevel = 100,
-                        Speed = 60
-                    },
-                    new SensorData
-                    {
-                        DateTimeUtc = DateTime.UtcNow,
-                        FuelLevel = 90,
-                        Speed = 90
-                    }
-                });
-            
-            return truck;
+            return new Driver
+            {
+                Id = Guid.NewGuid(),
+                Balance = 100,
+                Name = "John",
+                Rating = 4.3
+            };
         }
     }
 }

@@ -29,7 +29,7 @@ namespace IgniteTrucksManager.Core.Domain
             _driversRepository = driversRepository ??
                                  throw new ArgumentNullException(nameof(driversRepository));
         }
-
+        
         /// <summary>
         /// Place a new order.
         /// </summary>

@@ -9,6 +9,10 @@ namespace IgniteTrucksManager.Core.ExternalProvider
     /// </summary>
     internal static class TripsData
     {
+        /// <summary>
+        /// Generates trips.
+        /// </summary>
+        /// <returns>Trips.</returns>
         public static IList<Trip> GetTrips()
         {
             return new List<Trip>
