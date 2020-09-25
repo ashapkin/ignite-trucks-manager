@@ -12,13 +12,13 @@ namespace IgniteTrucksManager.Core.Repo
         /// <summary>
         /// Adds a driver to a storage.
         /// </summary>
-        /// <param name="truck">Driver model.</param>
-        void Save(Driver truck);
+        /// <param name="driver">Driver model.</param>
+        void Save(Driver driver);
 
         /// <summary>
         /// Gets a driver from a storage.
         /// </summary>
-        /// <param name="id">Truck identifier.</param>
+        /// <param name="id">Driver identifier.</param>
         /// <returns>Driver model</returns>
         Driver Get(Guid id);
 

@@ -7,12 +7,12 @@ using IgniteTrucksManager.Core.Models;
 namespace IgniteTrucksManager.Core.Repo
 {
     /// <summary>
-    /// Trucks repository.
+    /// Drivers repository.
     /// </summary>
     public class DriversRepository : IDriversRepository
     {
         /** */
-        private static readonly string CacheName = "Trucks";
+        private static readonly string CacheName = "Drivers";
         /** */
         private readonly IIgnite _ignite;
 
@@ -28,10 +28,10 @@ namespace IgniteTrucksManager.Core.Repo
         /// <summary>
         /// <inheritdoc cref="DriversRepository"/>
         /// </summary>
-        public void Save(Driver truck)
+        public void Save(Driver driver)
         {
             var cache = _ignite.GetOrCreateCache<Guid, Driver>(CacheName);
-            cache[truck.Id] = truck;
+            cache[driver.Id] = driver;
         }
 
         /// <summary>

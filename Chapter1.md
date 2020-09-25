@@ -30,20 +30,15 @@ You should be able to see similar console output:
 Hello World!
 ```
 
-Now it's time to deine our business models. For now we need the following onces: a truck representation with `Truck.cs` and the sensors data - `SensorData.cs`
-This is a foreign key relation is a tradidtional DB, therefore a truck will store related sensors information:
-```csharp
-/** Internal sensor data collection. */
-private readonly List<SensorData> _data = new List<SensorData>();
-```
+Now it's time to deine our business models. Lets keep it simple and define a driver model with `Driver.cs`
 
-Let's add the `ITrucksRepository` abstraction that will deal with Apache Ignite directly. We need to define a simple data access methods: `Get` and `Add`.
+Let's add the `IDriversRepository` abstraction that will deal with Apache Ignite directly. We need to define a simple data access methods: `Get` and `Add`.
 Here is the repository implementation:
 ```csharp
-public class TrucksRepository : ITrucksRepository
+public class DriversRepository : IDriverssRepository
 {
     /** */
-    private static readonly string CacheName = "Trucks";
+    private static readonly string CacheName = "Drivers";
     /** */
     private readonly IIgnite _ignite;
 
@@ -51,26 +46,26 @@ public class TrucksRepository : ITrucksRepository
     /// Ctor.
     /// </summary>
     /// <param name="ignite">Ignite instance.</param>
-    public TrucksRepository(IIgnite ignite)
+    public DriversRepository(IIgnite ignite)
     {
         _ignite = ignite ?? throw new ArgumentNullException(nameof(ignite));
     }
 
     /// <summary>
-    /// <inheritdoc cref="TrucksRepository"/>
+    /// <inheritdoc cref="DriversRepository"/>
     /// </summary>
-    public void Add(Truck truck)
+    public void Add(Driver driver)
     {
-        var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
-        cache[truck.Id] = truck;
+        var cache = _ignite.GetOrCreateCache<Guid, Driver>(CacheName);
+        cache[driver.Id] = driver;
     }
 
     /// <summary>
-    /// <inheritdoc cref="TrucksRepository"/>
+    /// <inheritdoc cref="DriversRepository"/>
     /// </summary>
-    public Truck Get(Guid id)
+    public Driver Get(Guid id)
     {
-        var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
+        var cache = _ignite.GetOrCreateCache<Guid, Driver>(CacheName);
         try
         {
             return cache[id];
@@ -88,20 +83,18 @@ After that, we can use a general K-V API to store or query the real data.
 
 Let's modify the `Progrma.cs` to verify that it's working:
 ```csharp
-static void Main(string[] args)
-{
-    using (var ignite = Ignition.Start())
+    static void Main(string[] args)
     {
-        ITrucksRepository repository = new TrucksRepository(ignite);
+        using var ignite = Ignition.Start();
+        IDriversRepository repository = new DriversRepository(ignite);
 
-        //truck generation method
-        Truck truck = GenerateTruck();
-        repository.Add(truck);
+        Driver driver = GenerateDriver();
+        repository.Save(driver);
 
-        Truck persistedTruck = repository.Get(truck.Id);
-
-        Console.WriteLine(persistedTruck);
-        Debug.Assert(persistedTruck != null);
+        Driver persistedDriver = repository.Get(driver.Id);
+                
+        Console.WriteLine(persistedDriver);
+        Debug.Assert(persistedDriver != null);
     }
 ```
 
