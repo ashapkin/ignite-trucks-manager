@@ -30,7 +30,30 @@ You should be able to see similar console output:
 Hello World!
 ```
 
-Now it's time to deine our business models. Lets keep it simple and define a driver model with `Driver.cs`
+### Working with a cache
+
+Now it's time to deine our business models. Lets keep it simple and define a simple POCO model `Driver.cs`. No additional configuration is required at the moment.
+
+```csharp
+/// <summary>
+/// Driver model.
+/// </summary>
+public class Driver : ModelBase<Guid>
+{
+    /// <summary>
+    /// Driver's name.
+    /// </summary>
+    public string Name { get; set; }
+    /// <summary>
+    /// Current rating.
+    /// </summary>
+    public double Rating { get; set; }
+    /// <summary>
+    /// Driver's account balance.
+    /// </summary>
+    public decimal Balance { get; set; }
+}
+```
 
 Let's add the `IDriversRepository` abstraction that will deal with Apache Ignite directly. We need to define a simple data access methods: `Get` and `Add`.
 Here is the repository implementation:
@@ -101,3 +124,9 @@ Let's modify the `Progrma.cs` to verify that it's working:
 Note, that in general Ignite cache can store any objects, since all it needs is just a plain byte array. And we haven't specified any serialization rules
 or additional logic explicitly. The Apache Ignite .NET can serialize our models into byte arrays using reflection. In case if large models with many fields or if there are some intensive computations involved, the default serialization might be a bottleneck. In those cases it's recommended to implement
 the `IBinarizable` interface and manually control what fields are being serialized and how. We will check that in upcoming chapters.
+
+### Summary
+
+Now we can install Ignite and use it in our project. We defined our Driver model and can store and retrieve it from a cache. Also we defined the DriverRepository abstraction to decouple a storage model.
+
+In the next chapter we will see how to integrate Apache Ignite with ASP.NET Core Web framework.
