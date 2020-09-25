@@ -9,7 +9,7 @@ namespace IgniteTrucksManager.Core.Repo
     /// <summary>
     /// Trucks repository.
     /// </summary>
-    public class TrucksRepository : ITrucksRepository
+    public class DriversRepository : IDriversRepository
     {
         /** */
         private static readonly string CacheName = "Trucks";
@@ -20,26 +20,26 @@ namespace IgniteTrucksManager.Core.Repo
         /// Ctor.
         /// </summary>
         /// <param name="ignite">Ignite instance.</param>
-        public TrucksRepository(IIgnite ignite)
+        public DriversRepository(IIgnite ignite)
         {
             _ignite = ignite ?? throw new ArgumentNullException(nameof(ignite));
         }
 
         /// <summary>
-        /// <inheritdoc cref="TrucksRepository"/>
+        /// <inheritdoc cref="DriversRepository"/>
         /// </summary>
-        public void Save(Truck truck)
+        public void Save(Driver truck)
         {
-            var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
+            var cache = _ignite.GetOrCreateCache<Guid, Driver>(CacheName);
             cache[truck.Id] = truck;
         }
 
         /// <summary>
-        /// <inheritdoc cref="TrucksRepository"/>
+        /// <inheritdoc cref="DriversRepository"/>
         /// </summary>
-        public Truck Get(Guid id)
+        public Driver Get(Guid id)
         {
-            var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
+            var cache = _ignite.GetOrCreateCache<Guid, Driver>(CacheName);
             try
             {
                 return cache[id];
@@ -51,11 +51,11 @@ namespace IgniteTrucksManager.Core.Repo
         }
 
         /// <summary>
-        /// <inheritdoc cref="TrucksRepository"/>
+        /// <inheritdoc cref="DriversRepository"/>
         /// </summary>
-        public IEnumerable<Truck> GetAll()
+        public IEnumerable<Driver> GetAll()
         {
-            var cache = _ignite.GetOrCreateCache<Guid, Truck>(CacheName);
+            var cache = _ignite.GetOrCreateCache<Guid, Driver>(CacheName);
             return cache.Select(x => x.Value).ToList();
         }
     }

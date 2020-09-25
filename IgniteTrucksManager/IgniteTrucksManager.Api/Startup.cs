@@ -23,7 +23,7 @@ namespace IgniteTrucksManager.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IIgnite, IIgnite>(serviceProvider => Ignition.Start());
-            services.AddSingleton<ITrucksRepository, TrucksRepository>();
+            services.AddSingleton<IDriversRepository, DriversRepository>();
             services.AddSingleton<ExternalDataProvider, ExternalDataProvider>();
             services.AddControllers();
         }

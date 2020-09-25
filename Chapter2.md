@@ -11,13 +11,13 @@ First of all we need to configure the DI so we could have access to our data lay
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddSingleton<IIgnite, IIgnite>(serviceProvider => Ignition.Start());
-    services.AddSingleton<ITrucksRepository, TrucksRepository>();
+    services.AddSingleton<IDriversRepository, DriversRepository>();
     services.AddSingleton<ExternalDataProvider, ExternalDataProvider>();
     services.AddControllers();
 }
 ```
 
-Now we need a couple of controllers for initial data processing: `DataLoaderController.cs` and `TrucksController.cs`
+Now we need a couple of controllers for initial data processing: `DataLoaderController.cs` and `DriversController.cs`
 The `DataLoaderController` will simulate quering an external API and saving the data in Ignite.
 ```csharp
 /// <summary>
@@ -26,39 +26,36 @@ The `DataLoaderController` will simulate quering an external API and saving the 
 [HttpGet]
 public string Get()
 {
+    _logger.LogDebug("Loading data");
+
     _dataProvider.PullNewData();
     return "Completed!";
 }
 ```
 
-The `TrucksController` then will read persisted values:
+The `DriversController` then will read persisted values:
 ```csharp
 /// <summary>
-/// Gets trucks. For simlicity, marked as GET.
+/// Gets drivers. For simlicity, marked as GET.
 /// </summary>
 [HttpGet]
-public IEnumerable<Truck> Get()
+public IEnumerable<Driver> Get()
 {
     return _repository.GetAll();
 }
 ```
 
 Within `IgniteTrucksManager.Core` project we can simulate the external provider with the `ExternalDataProvider.cs` that 
-will generate values out of `TrucksData.GetData()` method:
+will generate values out of `DriversData.GetDrivers()` method:
 ```csharp
 /// <summary>
 /// Pulls the new data and save it to internal storage.
 /// </summary>
 public void PullNewData()
 {
-    IDictionary<Truck, SensorData[]> newData = TrucksData.GetData();
-
-    foreach (KeyValuePair<Truck, SensorData[]> item in newData)
+    foreach (Driver driver in DriversData.GetDrivers())
     {
-        Truck truck = _repository.Get(item.Key.Id) ?? item.Key;
-        truck.AddSensorData(item.Value);
-
-        _repository.Save(truck);
+        _repository.Save(driver);
     }
 }
 ```
