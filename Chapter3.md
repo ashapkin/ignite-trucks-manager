@@ -1,6 +1,6 @@
 # Chapter 3
 
-### Configuring Ignite logging
+### Configuring Ignite logging for .NET Core
 
 Logging is important whenever you are trying to understand what's going on with your grid. 
 It's helpful to debug your application or detect edge cases.
@@ -10,13 +10,20 @@ If you download a binary distributive, then you will notice that there is a file
 Thus, the simplest way to enable logging is to edit the `java.util.logging.properties` or add it to the classpath if it wasn't added previously.
 
 Ignite .NET knows how to deal with Ignite logging and forward the Java logs to the .NET world with help of JNI framework.
+You can check more details in the official docs https://apacheignite-net.readme.io/docs/logging
+
+#### Configuring log4Net to work with Apache Ignite.
 
 In our example, we are using the `Log4Net` framework. In order to start using it, the following packages need to be installed:
+
+1. Install packages
 
 ```
 <PackageReference Include="Apache.Ignite.Log4Net" Version="2.8.0" />
 <PackageReference Include="log4net" Version="2.0.8" />
 ```
+
+2. Configure Log4Net template
 
 Let's create a Log4Net config file `config/log4net.xml`:
 
@@ -47,6 +54,8 @@ Let's create a Log4Net config file `config/log4net.xml`:
 </log4net>
 ```
 
+3. Add Ignite logger configuration
+
 The configuration is straightforward, check out the log4net docs for more details.
 
 The last thing to do is to tell Ignite that we want to use the configured logger:
@@ -61,6 +70,8 @@ The last thing to do is to tell Ignite that we want to use the configured logger
 </igniteConfiguration>
 ```
 
+4. Configure ASP.NET Core logger factory.
+
 And configure the ASP.NET logging service:
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
@@ -73,4 +84,30 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerF
         
 ```
 
+5. Using in code
+
+```csharp
+[HttpGet]
+        [Route("topdrivers")]
+        public object TopDriversSql()
+        {
+            _logger.LogDebug("Getting top drivers");
+
+            var sql = "select Name, Rating from Driver order by Rating desc";
+
+            return _repository.Query(sql);
+        }
+```
+
+6. Checking result
+
+...
+
 Now the logs should be written to the `ignite/work/log/` directory of `IgniteTrucksManager.Api` project
+
+#### Summary
+
+Now we know how to enable Apache Ignite logging using log4Net. You can check another examples of other log integrations in official docks LINK TO DOCS. 
+It's impoerant to have logs if you want to ask a question about Ignite at the forum or SO...
+
+In the next chapter we will see how to work with SQL from .NET side.
