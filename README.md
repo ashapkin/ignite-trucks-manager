@@ -1,4 +1,4 @@
-# ignite-trucks-manager
+# Apache Ignite .NET Core Web application playbook
 
 This is a sample project that demonstrates how to use Apache Ignite API.
 
