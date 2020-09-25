@@ -1,6 +1,13 @@
 # Chapter 5
 
-### Introducing the SQL
+### Working with Apache Ignite SQL using .NET
+
+Now it's time to get back to our application and extend it with some additional logic as you remember...
+What we will do in chapter - creating a simple trip manager, that'll allow us to create/assign driver and finish orders.
+
+#### Turning our caches into SQL tables
+
+Cache API is not the only way of working with a cache, in Apache Ignite you can easily define you SQL tables and work with them just like with a relational DBs.
 
 So far, so good, but let's add more details into our model:
 
@@ -30,6 +37,8 @@ attributes to our fields.
 
 Note, that by default, table name will be resolved as our model name, singular, for sample - Driver.
 
+#### Performing queries
+
 Add an ugly method to our Driver's controller and try running the query:
 
 drivers/query?sql=select * from driver
@@ -51,8 +60,10 @@ Ok, let's try to specify our quiery right in-place:
         }
 ```
 
-The .NET framework support a well-known LINQ feature, the Apache Ignite have a LINQ extention as well,
-thus let's add it to our project
+#### Summary
+
+Now we can do some analytic for our data. The .NET framework support a well-known LINQ feature, the Apache Ignite have a LINQ extention as well,
+thus let's add it to our project in the next chapter.
 
 
 
