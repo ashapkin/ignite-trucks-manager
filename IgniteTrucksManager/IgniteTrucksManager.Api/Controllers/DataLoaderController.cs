@@ -15,7 +15,7 @@ namespace IgniteTrucksManager.Api.Controllers
         private readonly ExternalDataProvider _dataProvider;
 
         /** */
-        private readonly ILogger<TrucksController> _logger;
+        private readonly ILogger<DataLoaderController> _logger;
 
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace IgniteTrucksManager.Api.Controllers
         /// </summary>
         /// <param name="dataProvider">Data provider.</param>
         /// <param name="logger">Logger.</param>
-        public DataLoaderController(ExternalDataProvider dataProvider, ILogger<TrucksController> logger)
+        public DataLoaderController(ExternalDataProvider dataProvider, ILogger<DataLoaderController> logger)
         {
             _dataProvider = dataProvider;
             _logger = logger;
@@ -32,10 +32,11 @@ namespace IgniteTrucksManager.Api.Controllers
         /// <summary>
         /// Loads external data.
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public string Get()
         {
+            _logger.LogDebug("Loading data");
+
             _dataProvider.PullNewData();
             return "Completed!";
         }

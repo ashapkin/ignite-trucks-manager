@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IgniteTrucksManager.Core.Models;
+﻿using IgniteTrucksManager.Core.Models;
 using IgniteTrucksManager.Core.Repo;
 
 namespace IgniteTrucksManager.Core.ExternalProvider
@@ -11,9 +10,13 @@ namespace IgniteTrucksManager.Core.ExternalProvider
     public class ExternalDataProvider
     {
         /** */
-        private readonly ITrucksRepository _repository;
+        private readonly IDriversRepository _repository;
 
-        public ExternalDataProvider(ITrucksRepository repository)
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        /// <param name="repository">Repository.</param>
+        public ExternalDataProvider(IDriversRepository repository)
         {
             _repository = repository;
         }
@@ -23,14 +26,9 @@ namespace IgniteTrucksManager.Core.ExternalProvider
         /// </summary>
         public void PullNewData()
         {
-            IDictionary<Truck, SensorData[]> newData = TrucksData.GetData();
-
-            foreach (KeyValuePair<Truck, SensorData[]> item in newData)
+            foreach (Driver driver in DriversData.GetDrivers())
             {
-                Truck truck = _repository.Get(item.Key.Id) ?? item.Key;
-                truck.AddSensorData(item.Value);
-
-                _repository.Save(truck);
+                _repository.Save(driver);
             }
         }
     }
