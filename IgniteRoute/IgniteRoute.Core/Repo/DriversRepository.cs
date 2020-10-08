@@ -26,7 +26,7 @@ namespace IgniteRoute.Core.Repo
         }
 
         /// <summary>
-        /// <inheritdoc cref="DriversRepository"/>
+        /// <inheritdoc cref="IDriversRepository.Save"/>
         /// </summary>
         public void Save(Driver driver)
         {
@@ -35,7 +35,7 @@ namespace IgniteRoute.Core.Repo
         }
 
         /// <summary>
-        /// <inheritdoc cref="DriversRepository"/>
+        /// <inheritdoc cref="IDriversRepository.Get"/>
         /// </summary>
         public Driver Get(Guid id)
         {
@@ -51,7 +51,7 @@ namespace IgniteRoute.Core.Repo
         }
 
         /// <summary>
-        /// <inheritdoc cref="DriversRepository"/>
+        /// <inheritdoc cref="IDriversRepository.GetAll"/>
         /// </summary>
         public IEnumerable<Driver> GetAll()
         {

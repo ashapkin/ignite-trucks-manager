@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IgniteRoute.Core", "IgniteRoute.Core\IgniteRoute.Core.csproj", "{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IgniteRoute.Api", "IgniteRoute.Api\IgniteRoute.Api.csproj", "{59EC299E-99FC-4770-B113-928620B086F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59EC299E-99FC-4770-B113-928620B086F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59EC299E-99FC-4770-B113-928620B086F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59EC299E-99FC-4770-B113-928620B086F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59EC299E-99FC-4770-B113-928620B086F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
