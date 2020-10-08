@@ -133,6 +133,42 @@ services.AddSingleton<IDataLoader, StubDataLoader>();
 ...
 ```
 
+### Integration testing.
+
+As a final step in the chapter we want to ensure that our application is robust and works as expected, thus let's add a test solution for our core logic - `Apache.Ignite.Core.Tests`. We won't dive into the implementation details here, instead, you can walk through the source code and take a look at the implementation. We are going to add more tests in the next chapters for now there are only two:
+
+```csharp
+[Test]
+public void TestDriversSaveGetMethod()
+{
+    var driver = new Driver
+    {
+        Name = "Joshua",
+        Balance = 12.44m,
+        Id = Guid.NewGuid(),
+        Rating = 4.55
+    };
+
+    _driversRepository.Save(driver);
+
+    var stored = _driversRepository.Get(driver.Id);
+
+    driver.Should().BeEquivalentTo(stored);
+}
+
+[Test]
+public void TestSubDataLoader()
+{
+    _driversRepository.GetAll().Should().BeEmpty();
+
+    _stubDataLoader.LoadInitialData();
+
+    _driversRepository.GetAll().Should().NotBeEmpty();
+}
+```
+
+Note, though the tests look like unit ones, in reality, and for simplicity, we are doing an integration testing with a real Ignite instance internally. 
+
 ### Summary
 
-In this chapter, we reworked our initial console app into a REST API service. We added the `DriversController` and `DataLoaderController`, added a stub-generated data provider, and are able to work with our application from a browser. In real applications, the logic is far too complex and it's important to keep an eye on what's happening with Apache Ignite, therefore in the next chapter we will see how to configure logging for Apache Ignite.
+In this chapter, we reworked our initial console app into a REST API service. We added the `DriversController` and `DataLoaderController`, added a stub-generated data provider, and covered our solution with integration tests. So far so good, but for real business application it's important to keep an eye on what's happening with Apache Ignite itself, therefore in the next chapter we will see how to configure logging for our project.
