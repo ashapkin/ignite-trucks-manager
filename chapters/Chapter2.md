@@ -135,7 +135,7 @@ services.AddSingleton<IDataLoader, StubDataLoader>();
 
 ### Integration testing.
 
-As a final step in the chapter we want to ensure that our application is robust and works as expected, thus let's add a test solution for our core logic - `Apache.Ignite.Core.Tests`. We won't dive into the implementation details here, instead, you can walk through the source code and take a look at the implementation. We are going to add more tests in the next chapters for now there are only two:
+As a final step in the chapter we want to ensure that our application is robust and works as expected, thus let's add a test solution for our core logic - `IgniteRoute.Core.Tests`. We won't dive into the implementation details here, instead, you can walk through the source code and take a look at the implementation. We are going to add more tests in the next chapters for now there are only two:
 
 ```csharp
 [Test]
