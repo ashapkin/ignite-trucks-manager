@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using Apache.Ignite.Core;
-using IgniteTrucksManager.Core.Models;
-using IgniteTrucksManager.Core.Repo;
+using IgniteRoute.Core.Models;
+using IgniteRoute.Core.Repo;
 
-namespace IgniteTrucksManager.Core
+namespace IgniteRoute.Core
 {
     /// <summary>
     /// Program.

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Apache.Ignite.Core;
-using IgniteTrucksManager.Core.Models;
+using IgniteRoute.Core.Models;
 
-namespace IgniteTrucksManager.Core.Repo
+namespace IgniteRoute.Core.Repo
 {
     /// <summary>
     /// Drivers repository.

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgniteTrucksManager.Core", "IgniteTrucksManager.Core\IgniteTrucksManager.Core.csproj", "{9095DFAF-7DC1-4492-AB66-784A311B5DD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IgniteRoute.Core", "IgniteRoute.Core\IgniteRoute.Core.csproj", "{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9095DFAF-7DC1-4492-AB66-784A311B5DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9095DFAF-7DC1-4492-AB66-784A311B5DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9095DFAF-7DC1-4492-AB66-784A311B5DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9095DFAF-7DC1-4492-AB66-784A311B5DD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D68C7690-E0BC-4B1B-9B3F-9413F43E1499}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

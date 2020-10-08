@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IgniteTrucksManager.Core.Models
+namespace IgniteRoute.Core.Models
 {
     /// <summary>
     /// Driver model.
@@ -23,5 +23,10 @@ namespace IgniteTrucksManager.Core.Models
         /// Driver's account balance.
         /// </summary>
         public decimal Balance { get; set; }
+
+        public override string ToString()
+        {
+            return $"Driver [{Name} - {Id}]";
+        }
     }
 }

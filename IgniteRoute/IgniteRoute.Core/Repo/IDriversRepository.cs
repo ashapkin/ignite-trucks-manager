@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using IgniteTrucksManager.Core.Models;
+using IgniteRoute.Core.Models;
 
-namespace IgniteTrucksManager.Core.Repo
+namespace IgniteRoute.Core.Repo
 {
     /// <summary>
     /// Drivers repository interface.
